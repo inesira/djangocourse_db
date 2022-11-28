@@ -1,0 +1,65 @@
+{% extends 'app/layouts/default.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="{% url 'cat_create' %}" class="btn btn primary">Nouveau</h6>
+        </div>
+        <div class="card-body">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-alert mr-1"></i>{{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                   <span aria-hidden="true">&times;</span>
+                </button> 
+            </div>
+            {% endfor%}
+            {% endif %}
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>category_name</th>
+                            <th>option</th>
+                            
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for cat in Categories %}
+                        <tr>
+                            <td>{{cat.id}}</td>
+                            <td>{{ cat.category_name}}</td>
+                            
+                            <td>
+                                <a href="{% url 'cat_edit' cat.id %}" class="btn btn_primary">edit</a>
+                                <form action="{% url 'cat_delete' cat.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('voulew-vous supprimer cette categorie')" class="btn btn-danger">delete</button>
+                                </form>
+                            </td>
+                            
+                           
+                        </tr>
+                        {% endfor%}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

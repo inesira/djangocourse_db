@@ -1,0 +1,38 @@
+{% extends 'app/layouts/default.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+<!--Begin Page content -->
+<div class="Container-fluid">
+   <!--Page Heading-->
+   <h1 class="h3 mb-2 text gray-800">Categories</h1>
+   <!--DataTables Example-->
+   <div class="Card shodow mb-4">
+    <h6 class="m-0 font-weight-bold text-primary">Nouveau</h6>
+
+   </div>
+   <div class="Card-body">
+    <div class="container-fluid">
+        <form action="{% url 'cat_store'%}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form.category_name|as_crispy_field}}
+            </div>
+            <button type="submit" class="btn btn-primary">enregistrer</button>
+        </form>
+    </div>
+
+
+   </div>
+
+
+</div>
+<!--end content-->
+{% endblock %}
+
+
+
+
+
+
+
+
