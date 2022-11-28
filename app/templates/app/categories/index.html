@@ -32,6 +32,7 @@
                         <tr>
                             <th>id</th>
                             <th>category_name</th>
+                            <th>option</th>
                             
                         </tr>
                     </thead>
@@ -41,6 +42,7 @@
                         <tr>
                             <td>{{cat.id}}</td>
                             <td>{{ cat.category_name}}</td>
+                            
                             <td>
                                 <a href="{% url 'cat_edit' cat.id %}" class="btn btn_primary">edit</a>
                                 <form action="{% url 'cat_delete' cat.id %}" method="POST">

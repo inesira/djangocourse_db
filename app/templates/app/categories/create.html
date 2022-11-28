@@ -12,7 +12,7 @@
    </div>
    <div class="Card-body">
     <div class="container-fluid">
-        <form action="{% url 'cat_store'%}" method="POST"></form>
+        <form action="{% url 'cat_store'%}" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 {{form.category_name|as_crispy_field}}

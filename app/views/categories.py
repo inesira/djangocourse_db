@@ -1,7 +1,8 @@
-
-from django.shortcuts import render
+from django.shortcuts import redirect,render
 from django.http import HttpRequest
 from app.models import Category
+from app.forms import CategoryForm
+from django.contrib import messages
 
 def index(request):
     assert isinstance(request, HttpRequest)
