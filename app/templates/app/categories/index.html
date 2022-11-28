@@ -13,9 +13,19 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{% url 'Categories' %}" class="btn btn primary">New category</h6>
+            <a href="{% url 'cat_create' %}" class="btn btn primary">Nouveau</h6>
         </div>
         <div class="card-body">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-alert mr-1"></i>{{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                   <span aria-hidden="true">&times;</span>
+                </button> 
+            </div>
+            {% endfor%}
+            {% endif %}
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -31,6 +41,14 @@
                         <tr>
                             <td>{{cat.id}}</td>
                             <td>{{ cat.category_name}}</td>
+                            <td>
+                                <a href="{% url 'cat_edit' cat.id %}" class="btn btn_primary">edit</a>
+                                <form action="{% url 'cat_delete' cat.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('voulew-vous supprimer cette categorie')" class="btn btn-danger">delete</button>
+                                </form>
+                            </td>
+                            
                            
                         </tr>
                         {% endfor%}
@@ -42,4 +60,4 @@
     </div>
 
 </div>
-{ % endblock%}
+{% endblock %}
