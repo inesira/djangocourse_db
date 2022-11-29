@@ -1,81 +1,81 @@
 from django.shortcuts import redirect,render
 from django.http import HttpRequest
-from app.models import Category
-from app.forms import CategoryForm
+from app.models import Product
+from app.forms import ProductForm
 from django.contrib import messages
 
 def index(request):
     assert isinstance(request, HttpRequest)
-    Categories = Category.objects.all()
+    Products = Products.objects.all()
     return render(
         request,
-        'app/categories/index.html',
+        'app/products/index.html',
         {
-            'Categories' : Categories
+            'Products' : Products
         }
     )
     
 def create(request):
-    form = CategoryForm()
+    form = ProductForm()
     return render(
         request,
-        'app/categories/create.html',
+        'app/products/create.html',
         {
             'form' : form
         }
     )
 def store(request):
     if request.method == 'POST':
-        form = CategoryForm(request.POST)
+        form = ProductForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/categories')
+        return redirect('/products')
 
 def edit(request, id):
     assert isinstance(request, HttpRequest)
     if request.method == "GET":
         if id == 0:
-            form = CategoryForm()
+            form = ProductForm()
         else:
-            Categories = Category.objects.get(pk=id)
-            form = CategoryForm(isinstance=category)
+            products = Product.objects.get(pk=id)
+            form = ProductForm(isinstance=products)
         return render(
             request,
-            'app/categories/edit.html',
+            'app/products/edit.html',
             {
                 'form': form
             } 
         ) 
     else:
         if id == 0:
-            form = CategoryForm(request.POST)
+            form = ProductForm(request.POST)
         else:
-            Categories = Category.objects.get(pk=id)
-            form = CategoryForm(request.POST,isinstance=category)
+            Products = Products.objects.get(pk=id)
+            form = ProductForm(request.POST,isinstance=product)
         if form.is_valid():
             form.save()
-        return redirect('/categories') 
+        return redirect('/products') 
     delete(request, id)
-    Category = Category.objects.get(pk=id)
-    Category.delete
-    returnredirect('/categories')
+    Products = Products.objects.get(pk=id)
+    Products.delete
+    returnredirect('/products')
 def delete(request, id):
-    Categories = Category.objects.get(pk=id)
-    Categories.delete
+    Products = Products.objects.get(pk=id)
+    Products.delete
     messages.success(request,"suppression de la categorie avec success")
-    return redirect('/categories')   
+    return redirect('/products')   
 
 def edit_insert(request, id):
     assert isinstance(request, HttpRequest)
     if request.method == "GET":
         if id == 0:
-            form = CategoryForm()
+            form = ProductForm()
         else:
-            Categories = Category.objects.get(pk=id)
-            form = CategoryForm(isinstance=Categories)
+            Products = Products.objects.get(pk=id)
+            form = ProductForm(isinstance=Products)
         return render(
             request, 
-            'app/categories/edit.html',
+            'app/products/edit.html',
            
             {
                 'form': form
@@ -83,14 +83,14 @@ def edit_insert(request, id):
         )
     else:
         if id == 0:
-            form = CategoryForm(request.POST)
+            form = ProductForm(request.POST)
         else:    
-            Categories = Category.objects.get(pk=id)
-            form = CategoryForm(request.POST,isinstance=Categories)
+            Products = Products.objects.get(pk=id)
+            form = ProductForm(request.POST,isinstance=Products)
         if form.is_valid():
             form.save
             messages.success(request,"modification de la categorie avec success")
-            return render('/categories')
+            return render('/products')
 
 
 

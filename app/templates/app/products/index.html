@@ -13,7 +13,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{% url 'cat_create' %}" class="btn btn-primary">Nouveau</a>
+            <a href="{% url 'cat_create' %}" class="btn btn primary">Nouveau</h6>
         </div>
         <div class="card-body">
             {% if messages %}
@@ -32,22 +32,26 @@
                         <tr>
                             <th>id</th>
                             <th>category_name</th>
+                            <th>product_name</th>
+                            <th>unit_price</th>
                             <th>option</th>
                             
                         </tr>
                     </thead>
                     
                     <tbody>
-                        {% for cat in Categories %}
+                        {% for cat in Products %}
                         <tr>
                             <td>{{cat.id}}</td>
                             <td>{{ cat.category_name}}</td>
+                            <td>{{ cat.product_name}}</td>
+                            <td>{{ cat.unit_price}}</td>
                             
                             <td>
                                 <a href="{% url 'cat_edit' cat.id %}" class="btn btn_primary">edit</a>
                                 <form action="{% url 'cat_delete' cat.id %}" method="POST">
                                     {% csrf_token %}
-                                    <button type="submit" onclick="return confirm('voulew-vous supprimer cette categorie')" class="btn btn-danger">delete</button>
+                                    <button type="submit" onclick="return confirm('voulew-vous supprimer ce produit')" class="btn btn-danger">delete</button>
                                 </form>
                             </td>
                             

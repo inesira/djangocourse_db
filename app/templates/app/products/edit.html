@@ -4,7 +4,7 @@
 <!--Begin Page content -->
 <div class="Container-fluid">
    <!--Page Heading-->
-   <h1 class="h3 mb-2 text gray-800">Categories</h1>
+   <h1 class="h3 mb-2 text gray-800">Products</h1>
    <!--DataTables Example-->
    <div class="Card shodow mb-4">
     <h6 class="m-0 font-weight-bold text-primary">Nouveau</h6>
@@ -14,10 +14,12 @@
     <div class="container-fluid">
 
        
-        <form action="{% url 'cat_store' %}" method="POST">
+        <form action="{% url 'cat_edit' %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 {{form.category_name|as_crispy_field}}
+                {{form.product_name|as_crispy_field}}
+                {{form.unit_price|as_crispy_field}}
             </div>
             <button type="submit" class="btn btn-primary">enregistrer</button>
         </form>
